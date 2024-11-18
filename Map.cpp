@@ -11,42 +11,53 @@ Map::Map() {
 
 // Loads distance data from a file and fills the distanceMatrix
 void Map::loadDistanceData(const std::string& filename) {
-    // TODO: Your code here
     // Read each line in the CSV file
     // Read each cell separated by a comma
     // Convert cell to an integer and store in distanceMatrix
+	std::fstream file(filename);
+	std::string line;
+
+	int matrixRow = 0;
+	while (std::getline(file, line)) {
+		std::stringstream ss(line);
+		std::string cell;
+		int matrixCol = 0;
+		while (std::getline(ss, cell, ',')) {
+			distanceMatrix[matrixRow][matrixCol] = std::stoi(cell);
+			matrixCol++;
+		}
+		matrixRow++;
+	}
+
+	std::cout << "Distance matrix loaded successfully!" << std::endl; // TODO: Remove this line in production
 }
 
 // Checks if the distance between two provinces is within the allowed maxDistance
 bool Map::isWithinRange(int provinceA, int provinceB, int maxDistance) const {
-    // TODO: Your code here
-    return false; 
+	return distanceMatrix[provinceA][provinceB] <= maxDistance
 }
 
 // Marks a province as visited
 void Map::markAsVisited(int province) {
-    // TODO: Your code here
+	visited[province] = true;
 }
 
 // Checks if a province has already been visited
 bool Map::isVisited(int province) const {
-    // TODO: Your code here
-    return false;
+    return visited[province];
 }
 
 // Resets all provinces to unvisited
 void Map::resetVisited() {
-    // TODO: Your code here
+	std::fill(visited, visited + MAX_SIZE, false);
 }
 
 // Function to count the number of visited provinces
 int Map::countVisitedProvinces() const {
-    // TODO: Your code here
-    return 0;
+    return std::count(visited, visited + MAX_SIZE, true);
 }
 
 // Function to get the distance between two provinces
 int Map::getDistance(int provinceA, int provinceB) const {
-    // TODO: Your code here
-    return 0;
+    return distanceMatrix[provinceA][provinceB];
 }
