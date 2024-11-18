@@ -1,7 +1,7 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#define MAX_QUEUE_SIZE 0  // // TO DO: Define a maximum size for the queue to control memory usage considering the problem at hand
+#define MAX_QUEUE_SIZE 9  // // TO DO: Define a maximum size for the queue to control memory usage considering the problem at hand
 
 class Queue {
 
@@ -25,6 +25,9 @@ public:
 
     // Add a priority province
     void enqueuePriority(int province);
+
+	// Checks if the queue is full
+	bool isFull() const;
 };
 
 #endif // QUEUE_H
